@@ -1,0 +1,15 @@
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\bin\Debug\net6.0\BLL.deps.json
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\bin\Debug\net6.0\BLL.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\bin\Debug\net6.0\BLL.pdb
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\bin\Debug\net6.0\DAL.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\bin\Debug\net6.0\DAL.pdb
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\obj\Debug\net6.0\BLL.csproj.AssemblyReference.cache
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\obj\Debug\net6.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\obj\Debug\net6.0\BLL.AssemblyInfoInputs.cache
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\obj\Debug\net6.0\BLL.AssemblyInfo.cs
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\obj\Debug\net6.0\BLL.csproj.CoreCompileInputs.cache
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\obj\Debug\net6.0\BLL.csproj.CopyComplete
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\obj\Debug\net6.0\BLL.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\obj\Debug\net6.0\refint\BLL.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\obj\Debug\net6.0\BLL.pdb
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\BLL\obj\Debug\net6.0\ref\BLL.dll

@@ -1,0 +1,12 @@
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\bin\Debug\net6.0\DAL.deps.json
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\bin\Debug\net6.0\DAL.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\bin\Debug\net6.0\DAL.pdb
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debug\net6.0\DAL.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debug\net6.0\refint\DAL.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debug\net6.0\DAL.pdb
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debug\net6.0\ref\DAL.dll
