@@ -1,67 +1,56 @@
 ﻿using DAL.Abstractions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace DAL.Repositories;
 
 public class NoteRepository : INoteRepository
+    // TODO: много повторяющегося функционала, разбить репозитории на два непересекающихся функционала
 {
-    private readonly IMemoryCache _memoryCache;
+    //private readonly IMemoryCache _memoryCache;
     private readonly IDiaryRepository _diaryRepository;
+    private readonly DatabaseContext _db;
 
-    public NoteRepository(IDiaryRepository diaryRepository, IMemoryCache memoryCache)
+    public NoteRepository(IDiaryRepository diaryRepository, DatabaseContext db)
     {
         _diaryRepository = diaryRepository;
-        _memoryCache = memoryCache;
+        // _memoryCache = memoryCache;
+        _db = db;
     }
 
-    public List<Note> GetAllNotes()
-    {
-        _memoryCache.TryGetValue("notes", out List<Note>? notes);
+    public List<Note> GetAllNotes() => _db.Notes.Include(n => n.Diary).ToList();
 
-        return notes ?? new List<Note>();
+    public Note? Get(int id) => GetAllNotes().Find(n => n.Id == id);
+
+    public void Create(int diaryId, string text)
+        => _diaryRepository.AddNote(diaryId, new Note(text));
+
+    public bool Update(int id, string newText)
+    {
+        var note = Get(id);
+        if (note is not null)
+        {
+            note.Text = newText;
+
+            _db.Entry(note).State = EntityState.Modified;
+            _db.SaveChanges();
+        }
+
+        return true;
     }
 
-    public Note? Get(int id) => GetAllNotes()?.Find(n => n.Id == id);
 
-    public void Create(int diaryId, string text) // todo: test
+    public bool Delete(int id)
     {
-        var diaries = _diaryRepository.GetAllDiaries();
+        bool isSuccess = false;
+        var note = Get(id);
+        if (note is not null)
+        {
+            _db.Notes.Remove(note); // todo: where to check whether or not note exists in DAL or BLL?
+            _db.SaveChanges();
+            isSuccess = true;
+        }
 
-        var diary = diaries?.Find(d => d.Id == diaryId);
-        if (diary is null) return;
-
-        var notes = GetAllNotes();
-        var note = new Note(text);
-        
-        _diaryRepository.AddNote(diaryId, note);
-
-        // todo: remove while using database
-        note.Id = notes.Count + 1;
-
-        notes.Add(note);
-        _memoryCache.Set("notes", notes);
-    }
-
-    public bool Update(int diaryId, int noteId, string newText) // todo: test
-    {
-        var notes = GetAllNotes();
-        var note = notes?.Find(n => n.Id == noteId);
-        if (note is null) return false;
-
-        bool isUpdated = _diaryRepository.UpdateNote(diaryId, noteId, newText);
-        _memoryCache.Set("notes", notes);
-
-        return isUpdated;
-    }
-
-    public bool Delete(int diaryId, int noteId) // todo: test
-    {
-        bool isSuccess1 = _diaryRepository.DeleteNote(diaryId, noteId);
-
-        var notes = GetAllNotes();
-        var isSuccess2 = notes?.Remove(notes.Find(n => n.Id == noteId)) ?? false;
-        _memoryCache.Set("notes", notes);
-
-        return isSuccess1 && isSuccess2;
+        return isSuccess;
     }
 }

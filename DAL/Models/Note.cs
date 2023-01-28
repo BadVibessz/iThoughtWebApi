@@ -7,12 +7,17 @@ public class Note
     public string Text { get; set; } // todo: ENCRYPT!!! text should not be exposed even if database is compromised
 
     //todo: the solution https://security.stackexchange.com/questions/157422/store-encrypted-user-data-in-database
-    public DateTime DateOfCreation { get; } = DateTime.Now;
+    public string DateOfCreation { get; set; } //= DateTime.Now.ToString("f");
     public Diary? Diary { get; set; }
 
+    public Note()
+    {
+        
+    }
     public Note(string text, Diary? diary = null)
     {
-        this.Text = text;
-        if (diary is not null) this.Diary = diary;
+        Text = text;
+        if (diary is not null) Diary = diary;
+        this.DateOfCreation = DateTime.Now.ToString("f");
     }
 }

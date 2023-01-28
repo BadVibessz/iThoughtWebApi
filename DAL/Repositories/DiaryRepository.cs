@@ -1,4 +1,5 @@
 ﻿using DAL.Abstractions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace DAL.Repositories;
@@ -6,16 +7,35 @@ namespace DAL.Repositories;
 public class DiaryRepository : IDiaryRepository
 {
     private readonly IMemoryCache _memoryCache;
+    private readonly DatabaseContext _db;
 
-    public DiaryRepository(IMemoryCache memoryCache)
+
+    public DiaryRepository(DatabaseContext db)
     {
-        _memoryCache = memoryCache;
+        //_memoryCache = memoryCache;
+        _db = db;
+
+        //todo: remove (for debugging)
+        // Create("Personal Diary", "Private diary about my life", "12345678");
+        // Create("Work Diary", "Public diary about my work");
+        // Create("Abstract thoughts Diary", "Diary about my one-time thoughts");
+        //
+        // AddNote(1, new Note("Today I fucked Clara"));
+        // AddNote(1, new Note("Today Clara cheated on me"));
+        //
+        // AddNote(2, new Note("Today I was hired"));
+        // AddNote(2, new Note("Today I was fired"));
+        //
+        // AddNote(3, new Note("Why I always wanna sleep?"));
     }
 
     public List<Diary> GetAllDiaries()
     {
-        _memoryCache.TryGetValue("diaries", out List<Diary>? diaries);
-        return diaries ?? new List<Diary>();
+        // _memoryCache.TryGetValue("diaries", out List<Diary>? diaries);
+        // return diaries ?? new List<Diary>();
+
+        // todo: learn about lazy loading
+        return _db.Diaries.Include(d => d.Notes).ToList();
     }
 
     public Diary? Get(int id) =>
@@ -24,21 +44,23 @@ public class DiaryRepository : IDiaryRepository
 
     public void Create(string name, string? desc = null, string? pass = null)
     {
-        var diaries = GetAllDiaries();
+        var diaries = _db.Diaries;
 
         var diary = new Diary(name, desc, pass);
 
         // todo: remove while using database
-        diary.Id = diaries.Count + 1;
+        //diary.Id = diaries.Count + 1;
 
         diaries.Add(diary);
-        _memoryCache.Set("diaries", diaries);
+
+        _db.Diaries.Add(diary);
+        _db.SaveChanges();
+        //_memoryCache.Set("diaries", diaries);
     }
 
-    public bool Update(int id, string? newName, string? newDesc = null, string? newPass = null)
+    public bool Update(int id, string? newName = null, string? newDesc = null, string? newPass = null)
     {
-        var diaries = GetAllDiaries();
-        var diary = diaries?.Find(d => d.Id == id);
+        var diary = Get(id);
         bool isUpdated = false;
 
         if (diary is not null)
@@ -61,7 +83,11 @@ public class DiaryRepository : IDiaryRepository
                 isUpdated = true;
             }
 
-            _memoryCache.Set("diaries", diaries);
+            if (isUpdated)
+            {
+                _db.Entry(diary).State = EntityState.Modified;
+                _db.SaveChanges();
+            }
         }
 
         return isUpdated;
@@ -69,44 +95,55 @@ public class DiaryRepository : IDiaryRepository
 
     public bool Delete(int id)
     {
-        var diaries = GetAllDiaries();
-        var isSuccess = diaries?.Remove(diaries.Find(d => d.Id == id)) ?? false;
+        bool isSuccess = false;
 
-        _memoryCache.Set("diaries", diaries);
+        var diary = Get(id);
+        if (diary is not null)
+        {
+            _db.Diaries.Remove(diary); // todo: where to check whether or not diary exists in DAL or BLL?
+            _db.SaveChanges();
+            isSuccess = true;
+        }
+
         return isSuccess;
     }
 
     public void AddNote(int diaryId, Note note)
     {
-        var diaries = GetAllDiaries();
-        var diary = diaries?.Find(d => d.Id == diaryId);
-
+        var diary = Get(diaryId);
         if (diary is not null)
+        {
             diary.AddNote(note);
-
-        _memoryCache.Set("diaries", diaries);
+            _db.SaveChanges();
+        }
     }
 
     public bool UpdateNote(int diaryId, int noteId, string newText)
     {
-        var diaries = GetAllDiaries();
-        var diary = diaries?.Find(d => d.Id == diaryId);
+        // todo:
+        var diary = Get(diaryId);
         if (diary is null) return false;
 
         bool isUpdated = diary.UpdateNote(noteId, newText);
-        _memoryCache.Set("diaries", diaries);
+
+        if (isUpdated)
+        {
+            _db.Entry(diary).State = EntityState.Modified;
+            _db.SaveChanges();
+        }
 
         return isUpdated;
     }
 
     public bool DeleteNote(int diaryId, int noteId)
     {
-        var diaries = GetAllDiaries();
-        var diary = diaries?.Find(d => d.Id == diaryId);
+        var diary = Get(diaryId);
         if (diary is null) return false;
 
         bool isDeleted = diary.DeleteNote(noteId);
-        _memoryCache.Set("diaries", diaries);
+
+        if (isDeleted)
+            _db.SaveChanges();
 
         return isDeleted;
     }

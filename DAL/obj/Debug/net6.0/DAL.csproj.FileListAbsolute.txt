@@ -10,3 +10,5 @@ D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debu
 D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debug\net6.0\refint\DAL.dll
 D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debug\net6.0\DAL.pdb
 D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\DAL\obj\Debug\net6.0\ref\DAL.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\dal\bin\Debug\net6.0\DAL.runtimeconfig.json
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\dal\obj\Debug\net6.0\DAL.genruntimeconfig.cache

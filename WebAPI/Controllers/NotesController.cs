@@ -31,7 +31,7 @@ public class NotesController
         return new OkObjectResult(notes);
     }
     
-    [HttpGet("get-{int}")]
+    [HttpGet("get-{id}")]
     public IActionResult Get(int id)
     {
         NoteDTO? note = null;
@@ -62,12 +62,12 @@ public class NotesController
         return new OkResult();
     }
     
-    [HttpPut("update-note-{noteId}-in-diary-{diaryId}")]
-    public IActionResult Update(int diaryId, int noteId, string newText)
+    [HttpPut("update-note-{noteId}")]
+    public IActionResult Update(int noteId, string newText)
     {
         try
         {
-            _noteService.Update(diaryId, noteId,newText);
+            _noteService.Update(noteId,newText);
         }
         catch
         {
@@ -77,12 +77,12 @@ public class NotesController
         return new OkResult();
     }
     
-    [HttpDelete("delete-note-{noteId}-from-diary-{diaryId}")]
-    public IActionResult Update(int diaryId, int noteId)
+    [HttpDelete("delete-note-{noteId}")]
+    public IActionResult Delete(int noteId)
     {
         try
         {
-            _noteService.Delete(diaryId, noteId);
+            _noteService.Delete(noteId);
         }
         catch
         {

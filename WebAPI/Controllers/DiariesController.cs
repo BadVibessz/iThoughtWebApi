@@ -13,10 +13,11 @@ public class DiariesController
     public DiariesController(IDiaryService diaryService)
     {
         _diaryService = diaryService;
+        
     }
 
     // TODO: выводить Id дневника в апишке так же выводить список записок 
-    
+
     [HttpGet("get-all")]
     public IActionResult GetAll()
     {
@@ -113,13 +114,13 @@ public class DiariesController
 
         return new OkResult();
     }
-    
-    [HttpPut("update-note-{noteId}-in-diary-{diaryId}")]
+
+    [HttpPut("updateNote-{noteId}-in-diary-{diaryId}")]
     public IActionResult UpdateNote(int diaryId, int noteId, string newText)
     {
         try
         {
-            _diaryService.UpdateNote(diaryId,noteId,newText);
+            _diaryService.UpdateNote(diaryId, noteId, newText);
         }
         catch
         {
@@ -128,13 +129,13 @@ public class DiariesController
 
         return new OkResult();
     }
-    
-    [HttpDelete("delete-note-{noteId}-from-diary-{diaryId}")]
+
+    [HttpDelete("deleteNote-{noteId}-from-diary-{diaryId}")]
     public IActionResult DeleteNote(int diaryId, int noteId)
     {
         try
         {
-            _diaryService.DeleteNote(diaryId,noteId);
+            _diaryService.DeleteNote(diaryId, noteId);
         }
         catch
         {

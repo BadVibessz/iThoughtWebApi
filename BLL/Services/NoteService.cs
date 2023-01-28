@@ -15,6 +15,11 @@ public class NoteService : INoteService
     }
 
     public List<NoteDTO> GetAllNotes()
+        // {
+        //     var notes = _noteRepository.GetAllNotes();
+        //     var selected = notes.Select(n => new NoteDTO(n)).ToList();
+        //     return selected;
+        // }
         => _noteRepository.GetAllNotes().Select(n => new NoteDTO(n)).ToList();
 
 
@@ -24,9 +29,9 @@ public class NoteService : INoteService
     public void Create(int diaryId, string text)
         => _noteRepository.Create(diaryId, text);
 
-    public bool Update(int diaryId, int noteId, string newText)
-        => _noteRepository.Update(diaryId, noteId, newText);
+    public bool Update(int noteId, string newText)
+        => _noteRepository.Update(noteId, newText);
 
-    public bool Delete(int diaryId, int noteId)
-        => _noteRepository.Delete(diaryId, noteId);
+    public bool Delete(int noteId)
+        => _noteRepository.Delete(noteId);
 }

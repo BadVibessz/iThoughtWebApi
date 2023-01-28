@@ -5,6 +5,6 @@ public interface INoteRepository
     List<Note> GetAllNotes();
     Note? Get(int id);
     void Create(int diaryId, string text);
-    bool Update(int diaryId, int noteId, string newText);
-    bool Delete(int diaryId, int noteId);
+    bool Update(int id, string newText);
+    bool Delete(int id);
 }
