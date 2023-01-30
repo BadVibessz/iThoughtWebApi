@@ -30,14 +30,16 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddTransient<IDiaryRepository, DiaryRepository>();
 builder.Services.AddTransient<INoteRepository, NoteRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 
 builder.Services.AddTransient<IDiaryService, DiaryService>();
 builder.Services.AddTransient<INoteService, NoteService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     // todo: form config
-    options.UseNpgsql(@"host=localhost;port=5432;database=iThought;user id=postgres;password=gunna;");
+    options.UseNpgsql(@"host=localhost;port=5432;database=iThought2;user id=postgres;password=gunna;");
 });
 
 

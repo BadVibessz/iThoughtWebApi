@@ -4,7 +4,7 @@ public interface IDiaryRepository // todo: пока что реализоват�
 {
     List<Diary> GetAllDiaries();
     Diary? Get(int id);
-    void Create(string name, string? desc = null, string? pass = null);
+    void Create(int userId,string name, string? desc = null, string? pass = null);
     bool Update(int id, string? newName, string? newDesc = null, string? newPass = null);
     bool Delete(int id);
 

@@ -6,7 +6,7 @@ public interface IDiaryService
 {
     List<DiaryDTO> GetAllDiaries();
     DiaryDTO? Get(int id);
-    void Create(string name, string? desc = null, string? pass = null);
+    void Create(int userId, string name, string? desc = null, string? pass = null);
     bool Update(int id, string? newName, string? newDesc = null, string? newPass = null);
     bool Delete(int id);
 

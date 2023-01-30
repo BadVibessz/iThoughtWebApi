@@ -51,12 +51,12 @@ public class DiariesController
         return new OkObjectResult(diary);
     }
 
-    [HttpPost("create")]
-    public IActionResult Create(string name, string? desc = null, string? pass = null)
+    [HttpPost("create-to-{userId}")]
+    public IActionResult Create(int userId, string name, string? desc = null, string? pass = null)
     {
         try
         {
-            _diaryService.Create(name, desc, pass);
+            _diaryService.Create(userId, name, desc, pass);
         }
         catch
         {

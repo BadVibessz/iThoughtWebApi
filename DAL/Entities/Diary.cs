@@ -6,15 +6,13 @@ namespace DAL;
 
 public class Diary
 {
-    public int Id { get; set; } // todo: while using database REMOVE SETTER!
+    public int Id { get; set; }
     public string Name { get; set; }
     public string? Description { get; set; }
     public string? Password { get; set; } // todo: разобраться с хешированием
-
-    [Column] public string DateOfCreation { get; set; } // = DateTime.Now.ToString("f"); // todo: not mapping
-
-    //public List<Note> Notes { get; set; } = new(); // todo: safe setter?
-    public ICollection<Note> Notes { get; set; } = new Collection<Note>(); // todo: safe setter?
+    public string DateOfCreation { get; set; } // private setter?
+    public User? User { get; set; } // todo: remove nullable
+    public List<Note> Notes { get; set; } = new(); // todo: safe setter?
 
     public Diary()
     {
@@ -25,12 +23,14 @@ public class Diary
         Name = other.Name;
         Description = other.Description;
         Password = other.Password;
-        //Notes = new(other.Notes);
-        Notes = other.Notes; // todo: copy
+        Notes = new(other.Notes);
+        DateOfCreation = DateTime.Now.ToString("f");
+        User = other.User;
     }
 
-    public Diary(string name, string? desc = null, string? pass = null)
+    public Diary(User? user, string name, string? desc = null, string? pass = null)
     {
+        this.User = user;
         this.Name = name;
         this.Description = desc;
         this.Password = pass;

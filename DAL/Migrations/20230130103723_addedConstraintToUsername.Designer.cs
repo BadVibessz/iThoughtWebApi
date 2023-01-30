@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230127122152_testing")]
-    partial class testing
+    [Migration("20230130103723_addedConstraintToUsername")]
+    partial class addedConstraintToUsername
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,7 +48,12 @@ namespace DAL.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Diaries", "public");
                 });
@@ -60,6 +65,10 @@ namespace DAL.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DateOfCreation")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int?>("DiaryId")
                         .HasColumnType("integer");
@@ -75,11 +84,56 @@ namespace DAL.Migrations
                     b.ToTable("Notes", "public");
                 });
 
+            modelBuilder.Entity("DAL.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DateOfCreation")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Salt")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users", "public");
+                });
+
+            modelBuilder.Entity("DAL.Diary", b =>
+                {
+                    b.HasOne("DAL.User", "User")
+                        .WithMany("Diaries")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DAL.Note", b =>
                 {
                     b.HasOne("DAL.Diary", "Diary")
                         .WithMany("Notes")
-                        .HasForeignKey("DiaryId");
+                        .HasForeignKey("DiaryId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Diary");
                 });
@@ -87,6 +141,11 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.Diary", b =>
                 {
                     b.Navigation("Notes");
+                });
+
+            modelBuilder.Entity("DAL.User", b =>
+                {
+                    b.Navigation("Diaries");
                 });
 #pragma warning restore 612, 618
         }

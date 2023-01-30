@@ -8,8 +8,9 @@ public class Note
 
     //todo: the solution https://security.stackexchange.com/questions/157422/store-encrypted-user-data-in-database
     public string DateOfCreation { get; set; } //= DateTime.Now.ToString("f");
-    public Diary? Diary { get; set; }
+    public Diary? Diary { get; set; } // remove nullable?
 
+    // todo: password?
     public Note()
     {
         

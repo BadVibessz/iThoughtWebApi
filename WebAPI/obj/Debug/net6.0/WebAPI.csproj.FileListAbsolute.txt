@@ -51,3 +51,9 @@ D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\WebAPI\bin\D
 D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\WebAPI\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\WebAPI\bin\Debug\net6.0\System.Text.Json.dll
 D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\WebAPI\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Json.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\WebAPI\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\WebAPI\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Physical.dll
+D:\MINE\ПРОГРАММИРОВАНИЕ\C#\Projects\iThoughtWebApi\WebAPI\bin\Debug\net6.0\Microsoft.Extensions.FileSystemGlobbing.dll

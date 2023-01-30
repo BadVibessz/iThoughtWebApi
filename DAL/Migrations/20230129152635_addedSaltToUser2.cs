@@ -5,15 +5,15 @@
 namespace DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class dateOfCreationgWorks : Migration
+    public partial class addedSaltToUser2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "DateOfCreation",
+                name: "Salt",
                 schema: "public",
-                table: "Notes",
+                table: "Users",
                 type: "text",
                 nullable: false,
                 defaultValue: "");
@@ -23,9 +23,9 @@ namespace DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "DateOfCreation",
+                name: "Salt",
                 schema: "public",
-                table: "Notes");
+                table: "Users");
         }
     }
 }

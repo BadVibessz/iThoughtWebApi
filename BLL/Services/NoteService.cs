@@ -15,11 +15,6 @@ public class NoteService : INoteService
     }
 
     public List<NoteDTO> GetAllNotes()
-        // {
-        //     var notes = _noteRepository.GetAllNotes();
-        //     var selected = notes.Select(n => new NoteDTO(n)).ToList();
-        //     return selected;
-        // }
         => _noteRepository.GetAllNotes().Select(n => new NoteDTO(n)).ToList();
 
 

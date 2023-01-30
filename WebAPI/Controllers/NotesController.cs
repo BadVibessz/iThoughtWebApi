@@ -62,7 +62,7 @@ public class NotesController
         return new OkResult();
     }
     
-    [HttpPut("update-note-{noteId}")]
+    [HttpPut("update-{noteId}")]
     public IActionResult Update(int noteId, string newText)
     {
         try
@@ -77,7 +77,7 @@ public class NotesController
         return new OkResult();
     }
     
-    [HttpDelete("delete-note-{noteId}")]
+    [HttpDelete("delete-{noteId}")]
     public IActionResult Delete(int noteId)
     {
         try

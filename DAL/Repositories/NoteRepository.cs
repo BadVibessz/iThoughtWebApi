@@ -7,10 +7,8 @@ namespace DAL.Repositories;
 public class NoteRepository : INoteRepository
     // TODO: много повторяющегося функционала, разбить репозитории на два непересекающихся функционала
 {
-    //private readonly IMemoryCache _memoryCache;
     private readonly IDiaryRepository _diaryRepository;
     private readonly DatabaseContext _db;
-
     public NoteRepository(IDiaryRepository diaryRepository, DatabaseContext db)
     {
         _diaryRepository = diaryRepository;

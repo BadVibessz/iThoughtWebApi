@@ -20,8 +20,8 @@ public class DiaryService : IDiaryService
     public DiaryDTO? Get(int id)
         => new(_diaryRepository.Get(id));
 
-    public void Create(string name, string? desc = null, string? pass = null)
-        => _diaryRepository.Create(name, desc, pass);
+    public void Create(int userId, string name, string? desc = null, string? pass = null)
+        => _diaryRepository.Create(userId, name, desc, pass);
 
     public bool Update(int id, string? newName, string? newDesc = null, string? newPass = null)
         => _diaryRepository.Update(id, newName, newDesc, newPass);
@@ -31,10 +31,10 @@ public class DiaryService : IDiaryService
 
     public void AddNote(int diaryId, NoteDTO note)
     {
-        var diaryDto = Get(diaryId);
-        var diary = new Diary(diaryDto.Name, diaryDto.Description, diaryDto.Password) { Id = diaryId }; // todo: possible null
+        // var diaryDto = Get(diaryId);
+        // var diary = new Diary(diaryDto.Name, diaryDto.Description, diaryDto.Password) { Id = diaryId }; // todo: possible null
 
-        _diaryRepository.AddNote(diaryId, new Note(note.Text, diary));
+        _diaryRepository.AddNote(diaryId, new Note(note.Text));
     }
     
     public bool UpdateNote(int diaryId, int noteId, string newText)

@@ -1,4 +1,5 @@
 ﻿using DAL.Abstractions;
+using DAL.Utility;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -6,13 +7,10 @@ namespace DAL.Repositories;
 
 public class DiaryRepository : IDiaryRepository
 {
-    private readonly IMemoryCache _memoryCache;
     private readonly DatabaseContext _db;
-
 
     public DiaryRepository(DatabaseContext db)
     {
-        //_memoryCache = memoryCache;
         _db = db;
 
         //todo: remove (for debugging)
@@ -29,33 +27,31 @@ public class DiaryRepository : IDiaryRepository
         // AddNote(3, new Note("Why I always wanna sleep?"));
     }
 
-    public List<Diary> GetAllDiaries()
-    {
-        // _memoryCache.TryGetValue("diaries", out List<Diary>? diaries);
-        // return diaries ?? new List<Diary>();
+    public List<Diary> GetAllDiaries() // todo: learn about lazy loading
+        => _db.Diaries
+            .Include(d => d.Notes)
+            .Include(d => d.User)
+            .ToList();
 
-        // todo: learn about lazy loading
-        return _db.Diaries.Include(d => d.Notes).ToList();
-    }
 
     public Diary? Get(int id) =>
         GetAllDiaries()?.Find(d => d.Id == id);
 
 
-    public void Create(string name, string? desc = null, string? pass = null)
+    public void Create(int userId, string name, string? desc = null, string? pass = null)
     {
-        var diaries = _db.Diaries;
+        var user = _db.Users.FirstOrDefault(u => u.Id == userId);
 
-        var diary = new Diary(name, desc, pass);
+        // todo: where to check whether or not user exists in DAL or BLL?
+        if (user is null) return; // todo: throw an exception?
 
-        // todo: remove while using database
-        //diary.Id = diaries.Count + 1;
+        if (pass is not null)
+            pass = Enctyption.Sha256HashSumOf(pass);
 
-        diaries.Add(diary);
+        var diary = new Diary(user, name, desc, pass);
 
         _db.Diaries.Add(diary);
         _db.SaveChanges();
-        //_memoryCache.Set("diaries", diaries);
     }
 
     public bool Update(int id, string? newName = null, string? newDesc = null, string? newPass = null)
@@ -79,7 +75,7 @@ public class DiaryRepository : IDiaryRepository
 
             if (newPass is not null)
             {
-                diary.Password = newPass;
+                diary.Password = Enctyption.Sha256HashSumOf(newPass);
                 isUpdated = true;
             }
 
